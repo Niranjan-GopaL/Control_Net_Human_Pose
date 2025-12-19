@@ -51,7 +51,7 @@ def sample(model, scheduler, train_config, diffusion_model_config,
 
     for i in tqdm(reversed(range(diffusion_config['num_timesteps']))):
         # Get prediction of noise
-        noise_pred = model(xt, torch.as_tensor(i).unsqueeze(0).to(device), hints, scale = 100.0)
+        noise_pred = model(xt, torch.as_tensor(i).unsqueeze(0).to(device), hints, scale = 1.0)
 
         # Use scheduler to get x0 and xt-1
         xt, x0_pred = scheduler.sample_prev_timestep(xt, noise_pred, torch.as_tensor(i).to(device))
